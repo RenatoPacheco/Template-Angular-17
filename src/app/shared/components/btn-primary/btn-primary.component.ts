@@ -5,7 +5,8 @@ import { Component, input } from '@angular/core';
   standalone: true,
   imports: [],
   host: {
-    '[title]': 'title()'
+    '[title]': 'title()',
+    'class': 'btn btn-primary'
   },
   templateUrl: './btn-primary.component.html',
   styleUrl: './btn-primary.component.scss'

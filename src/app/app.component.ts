@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { BtnPrimaryComponent } from './shared/components/btn-primary/btn-primary.component';
-import { BtnSecundaryComponent } from './shared/components/btn-secundary/btn-secundary.component';
+import { 
+  BtnPrimaryComponent, 
+  BtnSecundaryComponent 
+} from '@app/shared/components';
 
 @Component({
   selector: 'app-root',

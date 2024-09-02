@@ -1,6 +1,163 @@
 <button app-btn-primary title="Clique aqui...">
   Botão primário
 </button>
-<button app-btn-secundary title="Clique aqui...">
+<button app-btn-secondary title="Clique aqui...">
   Botão secundário
 </button>
+
+
+<div class="container my-5">
+
+<!-- Headings -->
+<h1 class="mb-3">Bootstrap 5 Components</h1>
+<h2>Headings</h2>
+<h1>h1 Heading</h1>
+<h2>h2 Heading</h2>
+<h3>h3 Heading</h3>
+<h4>h4 Heading</h4>
+<h5>h5 Heading</h5>
+<h6>h6 Heading</h6>
+
+<!-- Buttons -->
+<h2 class="mt-5">Buttons</h2>
+<button type="button" class="btn btn-primary">Primary Button</button>
+<button type="button" class="btn btn-secondary">Secondary Button</button>
+<button type="button" class="btn btn-success">Success Button</button>
+<button type="button" class="btn btn-danger">Danger Button</button>
+<button type="button" class="btn btn-warning">Warning Button</button>
+<button type="button" class="btn btn-info">Info Button</button>
+<button type="button" class="btn btn-light">Light Button</button>
+<button type="button" class="btn btn-dark">Dark Button</button>
+<button type="button" class="btn btn-link">Link Button</button>
+
+<!-- Alerts -->
+<h2 class="mt-5">Alerts</h2>
+<div class="alert alert-primary" role="alert">This is a primary alert—check it out!</div>
+<div class="alert alert-secondary" role="alert">This is a secondary alert—check it out!</div>
+<div class="alert alert-success" role="alert">This is a success alert—check it out!</div>
+<div class="alert alert-danger" role="alert">This is a danger alert—check it out!</div>
+<div class="alert alert-warning" role="alert">This is a warning alert—check it out!</div>
+<div class="alert alert-info" role="alert">This is an info alert—check it out!</div>
+<div class="alert alert-light" role="alert">This is a light alert—check it out!</div>
+<div class="alert alert-dark" role="alert">This is a dark alert—check it out!</div>
+
+<!-- Forms -->
+<h2 class="mt-5">Forms</h2>
+<form>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- Tables -->
+<h2 class="mt-5">Tables</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>twitter</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Cards -->
+<h2 class="mt-5">Cards</h2>
+<div class="card" style="width: 18rem;">
+    <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>
+
+<!-- Navs -->
+<h2 class="mt-5">Navs</h2>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Active</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled">Disabled</a>
+    </li>
+</ul>
+
+<!-- Progress -->
+<h2 class="mt-5">Progress Bars</h2>
+<div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+</div>
+<div class="progress mt-3">
+    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+</div>
+<div class="progress mt-3">
+    <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+</div>
+<div class="progress mt-3">
+    <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+</div>
+
+<!-- Modals -->
+<h2 class="mt-5">Modal</h2>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                This is a modal example.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

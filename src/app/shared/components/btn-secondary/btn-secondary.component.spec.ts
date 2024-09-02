@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BtnSecundaryComponent } from './btn-secundary.component';
+import { BtnSecondaryComponent } from './btn-secondary.component';
 
-describe('BtnSecundaryComponent', () => {
-  let component: BtnSecundaryComponent;
-  let fixture: ComponentFixture<BtnSecundaryComponent>;
+describe('BtnSecondaryComponent', () => {
+  let component: BtnSecondaryComponent;
+  let fixture: ComponentFixture<BtnSecondaryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BtnSecundaryComponent]
+      imports: [BtnSecondaryComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(BtnSecundaryComponent);
+    fixture = TestBed.createComponent(BtnSecondaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

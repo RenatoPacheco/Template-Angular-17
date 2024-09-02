@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { 
   BtnPrimaryComponent, 
-  BtnSecundaryComponent 
+  BtnSecondaryComponent 
 } from '@app/shared/components';
 
 @Component({
@@ -12,7 +12,7 @@ import {
   imports: [
     RouterOutlet, 
     BtnPrimaryComponent, 
-    BtnSecundaryComponent
+    BtnSecondaryComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -1,1 +1,33 @@
+$input-btn-focus-width: .05rem !default;
+$primary:               #376ea4 !default;
+$secondary:             lighten($primary, 50%) !default;
+
+$blue:    darken(#007bff,15%) !default;
+$indigo:  darken(#6610f2,15%) !default;
+$purple:  darken(#6f42c1,15%) !default;
+$pink:    darken(#e83e8c,15%) !default;
+$red:     darken(#dc3545,15%) !default;
+$orange:  darken(#fd7e14,15%) !default;
+$yellow:  darken(#ffc107,15%) !default;
+$green:   darken(#28a745,15%) !default;
+$teal:    darken(#15c997,15%) !default;
+$cyan:    darken(#17a2b8,15%) !default;
+
+$enable-rounded:        false !default;
+
+$border-radius:               0 !default;
+$border-radius-sm:            0 !default;
+$border-radius-lg:            0 !default;
+$border-radius-xl:            0 !default;
+$border-radius-xxl:           0 !default;
+$border-radius-pill:          0 !default;
+
+$breadcrumb-bg:       lighten($primary, 50%) !default;
+
+$sizes: (
+    10: 10%,
+    15: 15%,
+    20: 20%
+) !default;
+
 @import "../../../node_modules/bootstrap/scss/variables";

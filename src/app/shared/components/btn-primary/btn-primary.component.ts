@@ -14,7 +14,10 @@ import { Component, input } from '@angular/core';
 export class BtnPrimaryComponent {
 
   title = input('', {
-    transform: (value: string | null) => value?.toUpperCase()
+    transform: (value: string | null) => {
+      console.log("Valor alterado...");
+      return value?.toUpperCase();
+    }
   });
 
 }

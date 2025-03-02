@@ -11,4 +11,3 @@
 ```sh
 ng new adm-teste --routing=true --style=scss --ssr=true
 ```
-

@@ -11,3 +11,12 @@
 ```sh
 ng new adm-teste --routing=true --style=scss --ssr=true
 ```
+
+### Outros pacotes
+
+* `Font Awesome 4` npm install font-awesome
+* `Guid Typescript` npm i guid-typescript
+
+```sh
+npm install font-awesome guid-typescript
+```

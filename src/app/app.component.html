@@ -1,4 +1,51 @@
-<button type="button" class="btn btn-primary btn-lg">
-  <i class="fa fa-user"></i>
-  Single Button
-</button>
+<div class="container">
+  <button app-button theme="delete" type="button"></button>
+  <div class="row">
+    <div class="col-6">
+      <label app-label [for]="inputText">&nbsp;Texto</label>
+      <input #inputText app-input type="text" class="is-invalid" value="Search" placeholder="Search">
+    </div>
+    <div class="col-6">
+      <label app-label [for]="textarea">&nbsp;Texto</label>
+      <textarea #textarea app-textarea class="is-invalid" [rows]="5" placeholder="Search">
+
+      </textarea>
+    </div>
+    <div class="col-6">
+      <input #inputChack app-input type="checkbox" class="is-invalid" value="Search" placeholder="Search">
+      <label app-label [for]="inputChack">&nbsp;Texto</label>
+    </div>
+    <div class="col-6">
+      <input #inputRadio app-input type="radio" class="is-invalid" value="Search" placeholder="Search">
+      <label app-label [for]="inputRadio">&nbsp;Texto</label>
+    </div>
+    <div class="col-6">
+      <input #inputButton app-input type="button" class="is-invalid" value="Search" placeholder="Search">
+    </div>    
+    <div class="col-6">
+      <label app-label [for]="select">&nbsp;Texto</label>
+      <select #select app-select class="is-invalid" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-2" *ngFor="let num of [].constructor(12); let i = index">
+          <input #refChack app-input type="checkbox" class="is-invalid" value="Search" placeholder="Search">
+          <label app-label [for]="refChack">&nbsp;Texto</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-2" *ngFor="let num of [].constructor(12); let i = index">
+          <input #refChack app-input name="teste" type="radio" class="is-invalid" value="Search" placeholder="Search">
+          <label app-label [for]="refChack">&nbsp;Texto</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

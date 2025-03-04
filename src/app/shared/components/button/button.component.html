@@ -1,0 +1,5 @@
+<div #ref><ng-content></ng-content></div>
+<ng-container *ngIf="!ref.hasChildNodes()">
+  <i [class]="computedIcon()"></i>
+  <span [class]="computedTextClass()"> {{computedText()}}</span>
+</ng-container>

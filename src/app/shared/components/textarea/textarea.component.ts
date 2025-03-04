@@ -1,5 +1,6 @@
 import { Component, computed, model } from '@angular/core';
 import { Guid } from 'guid-typescript';
+import { IFormElement } from '../../interfaces';
 
 @Component({
   selector: 'textarea[app-textarea]',
@@ -8,12 +9,13 @@ import { Guid } from 'guid-typescript';
   host: {
     '[class]': 'classComputed()',
     '[id]': 'idComputed()',
+    '[name]': 'nameComputed()',
     '[rows]': 'rowsComputed()'
   },
   templateUrl: './textarea.component.html',
   styleUrl: './textarea.component.scss'
 })
-export class TextareaComponent {
+export class TextareaComponent implements IFormElement {
 
   // #region class
   public classModel = model('', {
@@ -51,6 +53,24 @@ export class TextareaComponent {
   }
   // #endregion
 
+  // #region name
+  public nameModel = model<string>('', {
+    alias: 'name'
+  });
+
+  protected nameComputed = computed<string>(() => {
+    return `${this.nameModel()}`;
+  });
+
+  public get name(): string {
+    return this.nameModel(); 
+  }
+
+  public set name(value: string) {
+    this.nameModel.set(value);
+  }  
+  // #endregion
+
   // #region rows
   public rowsModel = model<number>(5, {
     alias: 'rows'
@@ -66,6 +86,12 @@ export class TextareaComponent {
 
   public set rows(value: number) {
     this.rowsModel.set(value);
+  }
+  // #endregion
+
+  // #region type
+  public get type(): 'textarea' {
+    return 'textarea'; 
   }
   // #endregion
 }

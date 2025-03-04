@@ -3,6 +3,7 @@ import { Guid } from 'guid-typescript';
 import { InputComponent } from '../input/input.component';
 import { SelectComponent } from '../select/select.component';
 import { TextareaComponent } from '../textarea/textarea.component';
+import { IFormElement } from '../../interfaces';
 
 type ForType = InputComponent | SelectComponent | TextareaComponent;
 
@@ -20,21 +21,17 @@ type ForType = InputComponent | SelectComponent | TextareaComponent;
 })
 export class LabelComponent {
   
-    // #region class
-    
+    // #region class    
     public classModel = model('', {
       alias: 'class'
     });
   
     protected classComputed = computed(() => {
       let classType = 'form-label';
-      if(this.forModel() instanceof InputComponent) {
-        if ((this.forModel() as InputComponent).type === 'checkbox'
-          || (this.forModel() as InputComponent).type === 'radio') {
-          classType = 'form-check-label';
-        }
-      } else if(this.forModel() instanceof SelectComponent) {
+      if (this.forModel()?.type === 'checkbox' || this.forModel()?.type === 'radio') {
         classType = 'form-check-label';
+      } else if (this.forModel()?.type === 'select') {
+        classType = 'form-select-label';
       }
       return `${classType} ${this.classModel()}`;
     });
@@ -49,8 +46,7 @@ export class LabelComponent {
   
     // #endregion
     
-    // #region id
-  
+    // #region id  
     public idModel = model<string>(`${Guid.create()}`, {
       alias: 'id'
     });
@@ -65,27 +61,24 @@ export class LabelComponent {
   
     public set id(value: string) {
       this.idModel.set(value);
-    }
-  
+    }  
     // #endregion
 
-    // #region for
-  
-    public forModel = model.required<ForType>({
+    // #region for  
+    public forModel = model.required<IFormElement>({
       alias: 'for'
     });
   
     protected forComputed = computed<string>(() => {
-      return (this.forModel() as any).id;
+      return this.forModel()?.id;
     });
   
-    public get for(): ForType {
+    public get for(): IFormElement {
       return this.forModel(); 
     }
   
-    public set for(value: ForType) {
+    public set for(value: IFormElement) {
       this.forModel.set(value);
-    }
-  
+    }  
     // #endregion
   }

@@ -1,11 +1,8 @@
 import { Component, computed, input, model } from '@angular/core';
 
 import { Guid } from 'guid-typescript';
-
-type InputType = 
-  'text' | 'checkbox' | 'radio' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search' | 'date' | 'datetime-local'
-  | 'month' | 'week' | 'time' | 'color' | 'file' | 'range' | 'hidden' | 'submit' | 'reset' | 'button' | 'image';
-
+import { IFormElement } from '../../interfaces';
+import { InputType } from '../../types';
 
 @Component({
   selector: 'input[app-input]',
@@ -14,15 +11,15 @@ type InputType =
   host: {
     '[class]': 'classComputed()',
     '[type]': 'typeComputed()',
+    '[name]': 'nameComputed()',
     '[id]': 'idComputed()'
   },
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss'
 })
-export class InputComponent {
+export class InputComponent implements IFormElement {
 
   // #region class
-
   public classModel = model('', {
     alias: 'class'
   });
@@ -39,11 +36,9 @@ export class InputComponent {
   public set class(value: string) {
     this.classModel.set(value);
   }
-
   // #endregion
 
   // #region id
-
   public idModel = model<string>(`${Guid.create()}`, {
     alias: 'id'
   });
@@ -59,11 +54,27 @@ export class InputComponent {
   public set id(value: string) {
     this.idModel.set(value);
   }
+  // #endregion
 
+  // #region name
+  public nameModel = model<string>('', {
+    alias: 'name'
+  });
+
+  protected nameComputed = computed<string>(() => {
+    return `${this.nameModel()}`;
+  });
+
+  public get name(): string {
+    return this.nameModel(); 
+  }
+
+  public set name(value: string) {
+    this.nameModel.set(value);
+  }  
   // #endregion
 
   // #region type
-
   public typeModel = model.required<InputType>({
     alias: 'type'
   });
@@ -79,7 +90,6 @@ export class InputComponent {
   public set type(value: InputType) {
     this.typeModel.set(value);
   }
-
   // #endregion
 
   private classList: Record<InputType, string> = {

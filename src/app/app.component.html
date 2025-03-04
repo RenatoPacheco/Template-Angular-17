@@ -34,16 +34,16 @@
     <div class="col-6">
       <div class="row">
         <div class="col-2" *ngFor="let num of [].constructor(12); let i = index">
-          <input #refChack app-input type="checkbox" class="is-invalid" value="Search" placeholder="Search">
-          <label app-label [for]="refChack">&nbsp;Texto</label>
+          <input #refRadio app-input type="checkbox" class="is-invalid" value="Search" placeholder="Search">
+          <label app-label [for]="refRadio">&nbsp;Texto</label>
         </div>
       </div>
     </div>
     <div class="col-6">
       <div class="row">
         <div class="col-2" *ngFor="let num of [].constructor(12); let i = index">
-          <input #refChack app-input name="teste" type="radio" class="is-invalid" value="Search" placeholder="Search">
-          <label app-label [for]="refChack">&nbsp;Texto</label>
+          <input #refRadio app-input name="teste" type="radio" class="is-invalid" value="Search" placeholder="Search">
+          <label app-label [for]="refRadio">&nbsp;Texto</label>
         </div>
       </div>
     </div>

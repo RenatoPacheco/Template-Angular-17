@@ -19,8 +19,8 @@ type ActionType = 'edit' | 'save' | 'delete' | 'new' | 'reset' | 'preview' | 'lo
 export class ButtonComponent {
 
   constructor(
-    private element: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private element: ElementRef<HTMLButtonElement>
   ) {
 
   }

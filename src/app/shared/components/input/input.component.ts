@@ -1,4 +1,4 @@
-import { Component, computed, Input, input, model, signal } from '@angular/core';
+import { Component, computed, ElementRef, Input, input, model, Renderer2, signal } from '@angular/core';
 
 import { Guid } from 'guid-typescript';
 import { IFormElement } from '../../interfaces';
@@ -18,6 +18,13 @@ import { InputType } from '../../types';
   styleUrl: './input.component.scss'
 })
 export class InputComponent implements IFormElement {
+
+  constructor(
+    private renderer: Renderer2,
+    private element: ElementRef<HTMLInputElement>
+  ) {
+
+  }  
 
   // #region class
   private _class = signal<string>('');

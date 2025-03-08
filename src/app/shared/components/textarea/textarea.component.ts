@@ -1,4 +1,4 @@
-import { Component, computed, Input, model, signal } from '@angular/core';
+import { Component, computed, ElementRef, Input, model, Renderer2, signal } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { IFormElement } from '../../interfaces';
 import { transformToNumber } from '../../helpers/transform.helper';
@@ -17,6 +17,13 @@ import { transformToNumber } from '../../helpers/transform.helper';
   styleUrl: './textarea.component.scss'
 })
 export class TextareaComponent implements IFormElement {
+
+  constructor(
+    private renderer: Renderer2,
+    private element: ElementRef<HTMLTextAreaElement>
+  ) {
+
+  }
 
   // #region class
   public classModel = model('', {

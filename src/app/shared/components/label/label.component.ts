@@ -1,4 +1,4 @@
-import { Component, computed, Input, model, signal } from '@angular/core';
+import { Component, computed, ElementRef, Input, model, Renderer2, signal } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { InputComponent } from '../input/input.component';
 import { SelectComponent } from '../select/select.component';
@@ -20,61 +20,67 @@ type ForType = InputComponent | SelectComponent | TextareaComponent;
   styleUrl: './label.component.scss'
 })
 export class LabelComponent {
-  
-    // #region class    
-    private _class = signal<string>('');
+  constructor(
+    private renderer: Renderer2,
+    private element: ElementRef<HTMLLabelElement>
+  ) {
 
-    @Input({ alias: 'class' })
-    public set class(value: string) {
-      this._class.set(value);
-    }
-
-    public get class(): string {
-      return this._class();
-    }
-  
-    protected classComputed = computed(() => {
-      let classType = 'form-label';
-      if (this._for()?.type === 'checkbox' || this._for()?.type === 'radio') {
-        classType = 'form-check-label';
-      } else if (this._for()?.type === 'select') {
-        classType = 'form-select-label';
-      }
-      return `${classType} ${this._class()}`;
-    });  
-    // #endregion
-    
-    // #region id
-    private _id = signal<string>(`${Guid.create()}`);
-  
-    @Input({ alias: 'id' })
-    public set id(value: string) {
-      this._id.set(value);
-    }
-    
-    public get id(): string {
-      return this._id();
-    }
-  
-    protected idComputed = computed(() => {
-      return this._id();
-    });
-    // #endregion
-
-    // #region for
-    private _for = signal<IFormElement|null>(null);
-
-    @Input({ alias: 'for' })
-    public set for(value: IFormElement|null) {
-      this._for.set(value);
-    }
-    
-    public get for(): IFormElement|null {
-      return this._for();
-    }    
-  
-    protected forComputed = computed<string|null>(() => {
-      return this._for()?.id ?? null;
-    });
-    // #endregion
   }
+
+  // #region class    
+  private _class = signal<string>('');
+
+  @Input({ alias: 'class' })
+  public set class(value: string) {
+    this._class.set(value);
+  }
+
+  public get class(): string {
+    return this._class();
+  }
+
+  protected classComputed = computed(() => {
+    let classType = 'form-label';
+    if (this._for()?.type === 'checkbox' || this._for()?.type === 'radio') {
+      classType = 'form-check-label';
+    } else if (this._for()?.type === 'select') {
+      classType = 'form-select-label';
+    }
+    return `${classType} ${this._class()}`;
+  });  
+  // #endregion
+  
+  // #region id
+  private _id = signal<string>(`${Guid.create()}`);
+
+  @Input({ alias: 'id' })
+  public set id(value: string) {
+    this._id.set(value);
+  }
+  
+  public get id(): string {
+    return this._id();
+  }
+
+  protected idComputed = computed(() => {
+    return this._id();
+  });
+  // #endregion
+
+  // #region for
+  private _for = signal<IFormElement|null>(null);
+
+  @Input({ alias: 'for' })
+  public set for(value: IFormElement|null) {
+    this._for.set(value);
+  }
+  
+  public get for(): IFormElement|null {
+    return this._for();
+  }    
+
+  protected forComputed = computed<string|null>(() => {
+    return this._for()?.id ?? null;
+  });
+  // #endregion
+}

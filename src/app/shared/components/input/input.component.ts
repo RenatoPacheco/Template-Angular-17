@@ -1,4 +1,4 @@
-import { Component, computed, input, model } from '@angular/core';
+import { Component, computed, Input, input, model, signal } from '@angular/core';
 
 import { Guid } from 'guid-typescript';
 import { IFormElement } from '../../interfaces';
@@ -20,76 +20,72 @@ import { InputType } from '../../types';
 export class InputComponent implements IFormElement {
 
   // #region class
-  public classModel = model('', {
-    alias: 'class'
-  });
+  private _class = signal<string>('');
+
+  @Input({ alias: 'class' })
+  public set class(value: string) {
+    this._class.set(value);
+  }
+  
+  public get class(): string {
+    return this._class();
+  }
 
   protected classComputed = computed(() => {
-    const classType = this.classList[this.typeModel()];
-    return `${classType} ${this.classModel()}`;
+    const classType = this.classList[this.typeComputed()];
+    return `${classType} ${this._class()}`;
   });
-
-  public get class(): string {
-    return this.classModel();
-  }
-
-  public set class(value: string) {
-    this.classModel.set(value);
-  }
   // #endregion
 
   // #region id
-  public idModel = model<string>(`${Guid.create()}`, {
-    alias: 'id'
-  });
+  private _id = signal<string>(`${Guid.create()}`);
 
-  protected idComputed = computed<string>(() => {
-    return `${this.idModel()}`;
-  });
-
-  public get id(): string {
-    return this.idModel(); 
-  }
-
+  @Input({ alias: 'id' })
   public set id(value: string) {
-    this.idModel.set(value);
+    this._id.set(value);
   }
+  
+  public get id(): string {
+    return this._id();
+  }
+
+  protected idComputed = computed(() => {
+    return this._id();
+  });
   // #endregion
 
   // #region name
-  public nameModel = model<string>('', {
-    alias: 'name'
-  });
+  private _name = signal<string>('');
 
-  protected nameComputed = computed<string>(() => {
-    return `${this.nameModel()}`;
-  });
-
+  @Input({ alias: 'name' })
+  public set name(value: string) {
+    this._name.set(value);
+  }
+  
   public get name(): string {
-    return this.nameModel(); 
+    return this._name();
   }
 
-  public set name(value: string) {
-    this.nameModel.set(value);
-  }  
+  protected nameComputed = computed(() => {
+    return this._name();
+  });
   // #endregion
 
   // #region type
-  public typeModel = model.required<InputType>({
-    alias: 'type'
-  });
+  private _type = signal<InputType>('text');
 
-  protected typeComputed = computed<InputType>(() => {
-    return `${this.typeModel()}`;
-  });
-
-  public get type(): InputType {
-    return this.typeModel(); 
-  }
-
+  @Input({ alias: 'type', required: true })
   public set type(value: InputType) {
-    this.typeModel.set(value);
+    this._type.set(value);
   }
+  
+  public get type(): InputType {
+    return this._type();
+  }
+
+  protected typeComputed = computed(() => {
+    return this._type();
+  });
   // #endregion
 
   private classList: Record<InputType, string> = {

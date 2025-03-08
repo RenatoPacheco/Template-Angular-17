@@ -1,4 +1,4 @@
-import { Component, computed, model } from '@angular/core';
+import { Component, computed, Input, model, signal } from '@angular/core';
 
 import { Guid } from 'guid-typescript';
 import { IFormElement } from '../../interfaces';
@@ -17,58 +17,55 @@ import { IFormElement } from '../../interfaces';
 })
 export class SelectComponent implements IFormElement {
 
-  // #region class  
-  public classModel = model('', {
-    alias: 'class'
-  });
+  // #region class
+  private _class = signal<string>('');
+
+  @Input({ alias: 'class' })
+  public set class(value: string) {
+    this._class.set(value);
+  }
+  
+  public get class(): string {
+    return this._class();
+  }
 
   protected classComputed = computed(() => {
-    return `form-select ${this.classModel()}`;
+    return `form-select ${this._class()}`;
   });
-
-  public get class(): string {
-    return this.classModel();
-  }
-
-  public set class(value: string) {
-    this.classModel.set(value);
-  }
   // #endregion
   
   // #region id
-  public idModel = model<string>(`${Guid.create()}`, {
-    alias: 'id'
-  });
+  private _id = signal<string>(`${Guid.create()}`);
 
-  protected idComputed = computed<string>(() => {
-    return `${this.idModel()}`;
-  });
-
-  public get id(): string {
-    return this.idModel(); 
-  }
-
+  @Input({ alias: 'id' })
   public set id(value: string) {
-    this.idModel.set(value);
+    this._id.set(value);
   }
+  
+  public get id(): string {
+    return this._id();
+  }
+
+  protected idComputed = computed(() => {
+    return this._id();
+  });
   // #endregion
 
   // #region name
-  public nameModel = model<string>('', {
-    alias: 'name'
-  });
+  private _name = signal<string>('');
 
-  protected nameComputed = computed<string>(() => {
-    return `${this.nameModel()}`;
-  });
-
+  @Input({ alias: 'name' })
+  public set name(value: string) {
+    this._name.set(value);
+  }
+  
   public get name(): string {
-    return this.nameModel(); 
+    return this._name();
   }
 
-  public set name(value: string) {
-    this.nameModel.set(value);
-  }  
+  protected nameComputed = computed(() => {
+    return this._name();
+  });
   // #endregion  
 
   // #region type

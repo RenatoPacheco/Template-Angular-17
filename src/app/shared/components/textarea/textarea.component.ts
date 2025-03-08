@@ -1,6 +1,7 @@
-import { Component, computed, model } from '@angular/core';
+import { Component, computed, Input, model, signal } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { IFormElement } from '../../interfaces';
+import { transformToNumber } from '../../helpers/transform.helper';
 
 @Component({
   selector: 'textarea[app-textarea]',
@@ -36,57 +37,57 @@ export class TextareaComponent implements IFormElement {
   // #endregion
   
   // #region id
-  public idModel = model<string>(`${Guid.create()}`, {
-    alias: 'id'
-  });
+  private _id = signal<string>(`${Guid.create()}`);
 
-  protected idComputed = computed<string>(() => {
-    return `${this.idModel()}`;
-  });
-
-  public get id(): string {
-    return this.idModel(); 
-  }
-
+  @Input({ alias: 'id' })
   public set id(value: string) {
-    this.idModel.set(value);
+    this._id.set(value);
   }
+  
+  public get id(): string {
+    return this._id();
+  }
+
+  protected idComputed = computed(() => {
+    return this._id();
+  });
   // #endregion
 
   // #region name
-  public nameModel = model<string>('', {
-    alias: 'name'
-  });
+  private _name = signal<string>('');
 
-  protected nameComputed = computed<string>(() => {
-    return `${this.nameModel()}`;
-  });
-
+  @Input({ alias: 'name' })
+  public set name(value: string) {
+    this._name.set(value);
+  }
+  
   public get name(): string {
-    return this.nameModel(); 
+    return this._name();
   }
 
-  public set name(value: string) {
-    this.nameModel.set(value);
-  }  
+  protected nameComputed = computed(() => {
+    return this._name();
+  });
   // #endregion
 
   // #region rows
-  public rowsModel = model<number>(5, {
-    alias: 'rows'
-  });
+  private _rows = signal<number>(5);
 
-  protected rowsComputed = computed<number>(() => {
-    return this.rowsModel();
-  });
-
-  public get rows(): number {
-    return this.rowsModel(); 
-  }
-
+  @Input({ 
+    alias: 'rows', 
+    transform: (value: string|number) => transformToNumber(value) 
+  })
   public set rows(value: number) {
-    this.rowsModel.set(value);
+    this._rows.set(value);
   }
+  
+  public get rows(): number {
+    return this._rows();
+  }
+
+  protected rowsComputed = computed(() => {
+    return this._rows();
+  });
   // #endregion
 
   // #region type

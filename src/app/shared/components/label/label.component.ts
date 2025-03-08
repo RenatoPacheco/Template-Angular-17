@@ -1,4 +1,4 @@
-import { Component, computed, model } from '@angular/core';
+import { Component, computed, Input, model, signal } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { InputComponent } from '../input/input.component';
 import { SelectComponent } from '../select/select.component';
@@ -22,63 +22,59 @@ type ForType = InputComponent | SelectComponent | TextareaComponent;
 export class LabelComponent {
   
     // #region class    
-    public classModel = model('', {
-      alias: 'class'
-    });
+    private _class = signal<string>('');
+
+    @Input({ alias: 'class' })
+    public set class(value: string) {
+      this._class.set(value);
+    }
+
+    public get class(): string {
+      return this._class();
+    }
   
     protected classComputed = computed(() => {
       let classType = 'form-label';
-      if (this.forModel()?.type === 'checkbox' || this.forModel()?.type === 'radio') {
+      if (this._for()?.type === 'checkbox' || this._for()?.type === 'radio') {
         classType = 'form-check-label';
-      } else if (this.forModel()?.type === 'select') {
+      } else if (this._for()?.type === 'select') {
         classType = 'form-select-label';
       }
-      return `${classType} ${this.classModel()}`;
-    });
-  
-    public get class(): string {
-      return this.classModel();
-    }
-  
-    public set class(value: string) {
-      this.classModel.set(value);
-    }
-  
+      return `${classType} ${this._class()}`;
+    });  
     // #endregion
     
-    // #region id  
-    public idModel = model<string>(`${Guid.create()}`, {
-      alias: 'id'
-    });
+    // #region id
+    private _id = signal<string>(`${Guid.create()}`);
   
-    protected idComputed = computed<string>(() => {
-      return `${this.idModel()}`;
-    });
-  
+    @Input({ alias: 'id' })
+    public set id(value: string) {
+      this._id.set(value);
+    }
+    
     public get id(): string {
-      return this.idModel(); 
+      return this._id();
     }
   
-    public set id(value: string) {
-      this.idModel.set(value);
-    }  
+    protected idComputed = computed(() => {
+      return this._id();
+    });
     // #endregion
 
-    // #region for  
-    public forModel = model.required<IFormElement>({
-      alias: 'for'
-    });
-  
-    protected forComputed = computed<string>(() => {
-      return this.forModel()?.id;
-    });
-  
-    public get for(): IFormElement {
-      return this.forModel(); 
+    // #region for
+    private _for = signal<IFormElement|null>(null);
+
+    @Input({ alias: 'for' })
+    public set for(value: IFormElement|null) {
+      this._for.set(value);
     }
+    
+    public get for(): IFormElement|null {
+      return this._for();
+    }    
   
-    public set for(value: IFormElement) {
-      this.forModel.set(value);
-    }  
+    protected forComputed = computed<string|null>(() => {
+      return this._for()?.id ?? null;
+    });
     // #endregion
   }

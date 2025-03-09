@@ -28,14 +28,14 @@ export class LabelComponent {
   }
 
   // #region class    
-  private _class = signal<string>('');
+  private _class = signal<string|null>(null);
 
   @Input({ alias: 'class' })
-  public set class(value: string) {
+  public set class(value: string|null) {
     this._class.set(value);
   }
 
-  public get class(): string {
+  public get class(): string|null {
     return this._class();
   }
 

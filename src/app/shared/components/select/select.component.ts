@@ -24,14 +24,14 @@ export class SelectComponent implements IFormElement {
   }
 
   // #region class
-  private _class = signal<string>('');
+  private _class = signal<string|null>(null);
 
   @Input({ alias: 'class' })
-  public set class(value: string) {
+  public set class(value: string|null) {
     this._class.set(value);
   }
   
-  public get class(): string {
+  public get class(): string|null {
     return this._class();
   }
 
@@ -58,14 +58,14 @@ export class SelectComponent implements IFormElement {
   // #endregion
 
   // #region name
-  private _name = signal<string>('');
+  private _name = signal<string|null>(null);
 
   @Input({ alias: 'name' })
-  public set name(value: string) {
+  public set name(value: string|null) {
     this._name.set(value);
   }
   
-  public get name(): string {
+  public get name(): string|null {
     return this._name();
   }
 

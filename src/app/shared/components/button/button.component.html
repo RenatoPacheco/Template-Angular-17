@@ -1,5 +1,5 @@
 <div #ref><ng-content></ng-content></div>
 <ng-container *ngIf="!ref.hasChildNodes()">
-  <i [class]="computedIcon()"></i>
-  <span [class]="computedTextClass()"> {{computedText()}}</span>
+  <i [class]="iconComputed()"></i>
+  <span [class]="textClassComputed()"> {{textComputed()}}</span>
 </ng-container>

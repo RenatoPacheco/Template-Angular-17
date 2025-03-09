@@ -31,7 +31,7 @@ export class TextareaComponent implements IFormElement {
   });
 
   protected classComputed = computed(() => {
-    return `form-select ${this.classModel()}`;
+    return `form-control ${this.classModel()}`;
   });
 
   public get class(): string {

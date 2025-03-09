@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, input, Renderer2 } from '@angular/core';
+import { Component, computed, ElementRef, Input, input, Renderer2, signal } from '@angular/core';
 import { NgIf } from '@angular/common';
 
 type ThemeType = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'link' | 'transparent';
@@ -9,9 +9,9 @@ type ActionType = 'edit' | 'save' | 'delete' | 'new' | 'reset' | 'preview' | 'lo
   standalone: true,
   imports: [NgIf],
   host: {
-    '[class]' : 'computedClass()',
+    '[class]' : 'classComputed()',
     '[type]' : 'computedType()',
-    '[title]' : 'computedTitle()'
+    '[title]' : 'titleComputed()'
   },
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss'
@@ -25,86 +25,148 @@ export class ButtonComponent {
 
   }
 
-  public inputTheme = input.required<ActionType|ThemeType>({
-    alias: 'theme'
-  });
+  // #region theme
+  private _theme = signal<ActionType|ThemeType>('primary');
 
-  public inputText = input('', {
-    alias: 'text'
-  });
+  @Input({ alias: 'theme' })
+  public set theme(value: ActionType|ThemeType) {
+    this._theme.set(value);
+  }
+  
+  public get theme(): ActionType|ThemeType {
+    return this._theme();
+  }
+  // #endregion
 
-  public inputTextClass = input('', {
-    alias: 'text-class'
-  });
+  // #region title
+  private _title = signal<string|null>(null);
 
-  public inputTitle = input('', {
-    alias: 'title'
-  });
+  @Input({ alias: 'title' })
+  public set title(value: string|null) {
+    this._title.set(value);
+  }
+  
+  public get title(): string|null {
+    return this._title();
+  }
 
-  public inputIcon = input('', {
-    alias: 'icon'
-  });
-
-  public inputClass = input('', {
-    alias: 'class'
-  });
-
-  public inputType = input<'submit'|'reset'|'button'>('button', {
-    alias: 'type'
-  });
-
-  public inputInDropdown = input(false, {
-    alias: 'in-dropdown'
-  });
-
-
-  public computedText = computed(() => {
-    if (this.inputText()) {
-      return this.inputText();
+  public titleComputed = computed(() => {
+    if (this._title()) {
+      return this._title();
     }
 
-    return this.texts.hasOwnProperty(this.inputTheme())
-      ? this.texts[this.inputTheme() as ActionType] : '';
+    return this.titles.hasOwnProperty(this._theme())
+      ? this.titles[this._theme() as ActionType] : '';
   });
+  // #endregion
 
-  public computedTextClass = computed(() => {
-    return this.inputTextClass();
-  });
+  // #region text
+  private _text = signal<string|null>(null);
 
-  public computedTitle = computed(() => {
-    if (this.inputTitle()) {
-      return this.inputTitle();
+  @Input({ alias: 'text' })
+  public set text(value: string|null) {
+    this._text.set(value);
+  }
+  
+  public get text(): string|null {
+    return this._text();
+  }
+  
+  public textComputed = computed(() => {
+    if (this._text()) {
+      return this._text();
     }
 
-    return this.titles.hasOwnProperty(this.inputTheme())
-      ? this.titles[this.inputTheme() as ActionType] : '';
+    return this.texts.hasOwnProperty(this._theme())
+      ? this.texts[this._theme() as ActionType] : '';
   });
+  // #endregion
 
-  public computedIcon = computed(() => {
-    if (this.inputIcon()) {
-      return this.inputIcon();
-    }
+  // #region class
+  private _class = signal<string|null>(null);
 
-    return this.icons.hasOwnProperty(this.inputTheme())
-      ? this.icons[this.inputTheme() as ActionType] : '';
-  });
-
-  public computedClass = computed(() => {
+  @Input({ alias: 'class' })
+  public set class(value: string|null) {
+    this._class.set(value);
+  }
+  
+  public get class(): string|null {
+    return this._class();
+  }
+  
+  public classComputed = computed(() => {
     if(this.inputInDropdown()) {
-      return `dropdown-item ${this.inputClass()}`;
+      return `dropdown-item ${this._class()}`;
     }
 
-    let result = `${this.themes[this.inputTheme()]} ${this.inputClass()}`;
+    let result = `${this.themes[this._theme()]} ${this._class()}`;
 
-    if (this.inputClass()) {
-      result = `${result} ${this.inputClass()}`;
+    if (this._class()) {
+      result = `${result} ${this._class()}`;
     }
 
     return result;
   });
+  // #endregion
+
+  // #region type
+  private _type = signal<'submit'|'reset'|'button'>('button');
+
+  @Input({ alias: 'type' })
+  public set type(value: 'submit'|'reset'|'button') {
+    this._type.set(value);
+  }
+  
+  public get type(): 'submit'|'reset'|'button' {
+    return this._type();
+  }
 
   public computedType = computed(() => {
-    return this.inputType() ?? '';
+    return this._type();
+  });
+  // #endregion
+
+  // #region textClass
+  private _textClass = signal<string|null>('');
+
+  @Input({ alias: 'text-class' })
+  public set textClass(value: string|null) {
+    this._textClass.set(value);
+  }
+  
+  public get textClass(): string|null {
+    return this._textClass();
+  }
+
+  public textClassComputed = computed(() => {
+    return this._textClass();
+  });
+  // #endregion
+
+  // #region icon
+  private _icon = signal<string|null>(null);
+
+  @Input({ alias: 'icon' })
+  public set icon(value: string|null) {
+    this._icon.set(value);
+  }
+  
+  public get icon(): string|null {
+    return this._icon();
+  }
+
+  public iconComputed = computed(() => {
+    if (this._icon()) {
+      return this._icon();
+    }
+
+    return this.icons.hasOwnProperty(this._theme())
+      ? this.icons[this._theme() as ActionType] : null;
+  });
+  // #endregion
+
+  public inputInDropdown = input(false, {
+    alias: 'in-dropdown'
   });
 
   private titles: Record<ActionType, string> = {
